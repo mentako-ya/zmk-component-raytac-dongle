@@ -10,9 +10,9 @@ The stock MDBT50Q-RX does not come with the UF2 bootloader installed—that's t
 
 But! Some versions of the dongle do exist with the UF2 bootloader pre-installed, and that's what you want buy: [Adafruit (USA)](https://www.adafruit.com/product/5199) and [Pi Hut (UK)](https://thepihut.com/products/nrf52840-usb-key-with-tinyuf2-bootloader-bluetooth-low-energy-mdbt50q-rx) sell them, and probably others if you search around. I used the one from Adafruit.
 
-### Maybe You Should Update The Bootloader Too?
+### Update The Bootloader
 
-I upgraded the version of the bootloader on my Raytac dongle. I don't know if this is necessary because I upgraded before flashing ZMK onto it. It was easy and didn't hurt anything?
+I upgraded the version of the bootloader on my Raytac dongle. I don't know if this is absolutely necessary because I upgraded before flashing ZMK onto it, but [someone on Reddit](https://www.reddit.com/r/ErgoMechKeyboards/comments/1k4ejtx/raytac_dongle/norwr6p/) confirmed that they needed to update to get it working. So go ahead and update, it's easy.
 
 I used these [instructions](https://learn.adafruit.com/introducing-the-adafruit-nrf52840-feather/update-bootloader-use-uf2) to update the bootloader to version [0.9.2](https://github.com/adafruit/Adafruit_nRF52_Bootloader/releases/tag/0.9.2). Specifically I used [this exact one](https://github.com/adafruit/Adafruit_nRF52_Bootloader/releases/download/0.9.2/update-raytac_mdbt50q_rx_bootloader-0.9.2_nosd.uf2).
 
