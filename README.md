@@ -1,6 +1,6 @@
 # ZMK Raytac USB Dongle Module
 
-This repository adds a ZMK board definition named `raytac_mdbt50q_rx` for the [Raytac MDBT50Q-RX](https://www.raytac.com/product/ins.php?index_id=89) USB stick, with the intention of using it as a [ZMK keyboard dongle](https://zmk.dev/docs/development/hardware-integration/dongle).
+This repository adds a ZMK board definition named `mdbt50q_rx` for the [Raytac MDBT50Q-RX](https://www.raytac.com/product/ins.php?index_id=89) USB stick, with the intention of using it as a [ZMK keyboard dongle](https://zmk.dev/docs/development/hardware-integration/dongle).
 
 ![IMG_1775](./docs/images/IMG_1775.jpeg)
 
@@ -12,21 +12,30 @@ But! Some versions of the dongle do exist with the UF2 bootloader pre-installed,
 
 ### Update The Bootloader
 
-I upgraded the version of the bootloader on my Raytac dongle. I don't know if this is absolutely necessary because I upgraded before flashing ZMK onto it, but [someone on Reddit](https://www.reddit.com/r/ErgoMechKeyboards/comments/1k4ejtx/raytac_dongle/norwr6p/) confirmed that they needed to update to get it working. So go ahead and update, it's easy.
+I upgraded the version of the bootloader on my Raytac dongle and you should to. [Someone on Reddit](https://www.reddit.com/r/ErgoMechKeyboards/comments/1k4ejtx/raytac_dongle/norwr6p/) confirmed that you need to update to get it working. So go ahead and update, it's easy.
 
 I used these [instructions](https://learn.adafruit.com/introducing-the-adafruit-nrf52840-feather/update-bootloader-use-uf2) to update the bootloader to version [0.9.2](https://github.com/adafruit/Adafruit_nRF52_Bootloader/releases/tag/0.9.2). Specifically I used [this exact one](https://github.com/adafruit/Adafruit_nRF52_Bootloader/releases/download/0.9.2/update-raytac_mdbt50q_rx_bootloader-0.9.2_nosd.uf2).
 
+Once you update the bootloader, hold the button down while plugging it in, navigate to the drive in your file browser, and open `INFO_UF2.TXT`. You want to see this:
+
+```
+UF2 Bootloader 0.9.2 lib/nrfx (v2.0.0) lib/tinyusb (0.12.0-145-g9775e7691) lib/uf2 (remotes/origin/configupdate-9-gadbb8c7) # <-- Important, v0.9.2 from above
+...
+SoftDevice: S140 6.1.1 # <-- Important, v6.x of SoftDevice
+
+```
+
 ## ZMK Versioning
 
-ZMK v0.4 will introduce breaking changes which _affect this module and you as a user._
+ZMK v0.4 introduced breaking changes which _affect this module and you as a user._
 
 You must [pin your ZMK version](https://zmk.dev/blog/2025/06/20/pinned-zmk) and pin this module to match.
 
-The remainder of this readme will detail how to use the module **prior to ZMK v0.4.**
+The remainder of this readme will detail how to use the module in ZMK v0.4. 
 
-If you are using ZMK 0.4, please refer to an [later version of this readme](https://github.com/rschenk/zmk-component-raytac-dongle/tree/v0.4).
+If you are using an earlier version of ZMK, please refer to an [earlier version of this readme](https://github.com/rschenk/zmk-component-raytac-dongle/tree/v0.3).
 
-## Usage for ZMK 0.3 or earlier
+## Usage for ZMK 0.4
 
 Add the following entries to `remotes` and `projects` in `config/west.yml`
 
@@ -40,30 +49,30 @@ manifest:
   projects:
     - name: zmk
       remote: zmkfirmware
-      revision: v0.3 # <-- ZMK pinned to v0.3
+      revision: v0.4 # <-- ZMK pinned to v0.4
       import: app/west.yml
     - name: zmk-component-raytac-dongle
       remote: rschenk
-      revision: v0.3 # <-- This module pinned to the same version as ZMK
+      revision: v0.4 # <-- This module pinned to the same version as ZMK
   self:
     path: config
 ```
 
 ## Configuring Your Dongle
 
-Follow the setup steps in the [ZMK Keyboard Dongle docs](https://zmk.dev/docs/development/hardware-integration/dongle) to configure your keyboard and dongle. When you get to the [Building the Firmware](https://zmk.dev/docs/development/hardware-integration/dongle#building-the-firmware) step, you will use `board: raytac_mdbt50q_rx` in your `build.yml` file like so:
+Follow the setup steps in the [ZMK Keyboard Dongle docs](https://zmk.dev/docs/development/hardware-integration/dongle) to configure your keyboard and dongle. When you get to the [Building the Firmware](https://zmk.dev/docs/development/hardware-integration/dongle#building-the-firmware) step, you will use `board: mdbt50q_rx` in your `build.yml` file like so:
 
 ```yaml
 include:
   # Config settings for the dongle
-  - board: raytac_mdbt50q_rx
+  - board: mdbt50q_rx
     shield: my_keyboard_dongle
     
-  - board: raytac_mdbt50q_rx
+  - board: mdbt50q_rx
     shield: settings_reset
 
   # Whatever your keyboard uses...
-  - board: nice_nano_v2
+  - board: nice_nano
     shield: my_keyboard
 ```
 

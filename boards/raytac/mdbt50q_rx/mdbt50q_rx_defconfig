@@ -1,0 +1,57 @@
+# A lot of these options came from
+# zmk/app/boards/extensions/xiao_ble/xiao_ble.conf
+
+# Enable MPU
+CONFIG_ARM_MPU=y
+
+# Enable hardware stack protection
+CONFIG_HW_STACK_PROTECTION=y
+
+# Enable GPIO
+CONFIG_GPIO=y
+
+# Console and serial
+#   Disable the console subsystem, saving RAM and flash space
+#   Disable serial driver support
+#   Disable UART-based console output
+#   Disable interrupt-driven UART (uses polling if UART is needed)
+#   Enable USB HID support for wired connection
+#   Enable Bluetooth for wireless connection
+CONFIG_CONSOLE=n
+CONFIG_SERIAL=n
+CONFIG_UART_CONSOLE=n
+CONFIG_UART_INTERRUPT_DRIVEN=n
+CONFIG_ZMK_USB=y
+CONFIG_ZMK_BLE=y
+
+# Flash / non-volatile storage
+#   Allow writing to flash memory from the application (needed for settings storage)
+#   Enable Non-Volatile Storage subsystem for persistent key-value storage
+#   Use NVS as the backend for Zephyr's settings subsystem
+#   Enable flash memory driver
+#   Enable flash page layout API for determining flash geometry
+#   Enable flash map/partition support
+CONFIG_MPU_ALLOW_FLASH_WRITE=y
+CONFIG_NVS=y
+CONFIG_SETTINGS_NVS=y
+CONFIG_FLASH=y
+CONFIG_FLASH_PAGE_LAYOUT=y
+CONFIG_FLASH_MAP=y
+
+# Persitent storage so ZMK can save things like BLE pairing
+#   Enable retained memory driver (memory preserved across soft resets)
+#   Enable the retention subsystem for storing data across resets
+#   Enable boot mode retention to communicate with bootloader
+#   Set the magic value format for the Adafruit nRF52 bootloader (UF2)
+CONFIG_RETAINED_MEM=y
+CONFIG_RETENTION=y
+CONFIG_RETENTION_BOOT_MODE=y
+CONFIG_ZMK_BOOTMODE_MAGIC_VALUE_BOOTLOADER_TYPE_ADAFRUIT_NRF52=y
+
+
+# Build UF2 by default, supported by the Adafruit nRF52 Bootloader
+CONFIG_BUILD_OUTPUT_UF2=y
+CONFIG_USE_DT_CODE_PARTITION=y
+
+# Use maximum Bluetooth transmit power.
+CONFIG_BT_CTLR_TX_PWR_PLUS_8=y
