@@ -16,7 +16,17 @@ I upgraded the version of the bootloader on my Raytac dongle. I don't know if th
 
 I used these [instructions](https://learn.adafruit.com/introducing-the-adafruit-nrf52840-feather/update-bootloader-use-uf2) to update the bootloader to version [0.9.2](https://github.com/adafruit/Adafruit_nRF52_Bootloader/releases/tag/0.9.2). Specifically I used [this exact one](https://github.com/adafruit/Adafruit_nRF52_Bootloader/releases/download/0.9.2/update-raytac_mdbt50q_rx_bootloader-0.9.2_nosd.uf2).
 
-## Usage
+## ZMK Versioning
+
+ZMK v0.4 will introduce breaking changes which _affect this module and you as a user._
+
+You must [pin your ZMK version](https://zmk.dev/blog/2025/06/20/pinned-zmk) and pin this module to match.
+
+The remainder of this readme will detail how to use the module **prior to ZMK v0.4.**
+
+If you are using ZMK 0.4, please refer to an [later version of this readme](https://github.com/rschenk/zmk-component-raytac-dongle/tree/v0.4).
+
+## Usage for ZMK 0.3 or earlier
 
 Add the following entries to `remotes` and `projects` in `config/west.yml`
 
@@ -30,10 +40,11 @@ manifest:
   projects:
     - name: zmk
       remote: zmkfirmware
+      revision: v0.3 # <-- ZMK pinned to v0.3
       import: app/west.yml
     - name: zmk-component-raytac-dongle
       remote: rschenk
-      revision: main
+      revision: v0.3 # <-- This module pinned to the same version as ZMK
   self:
     path: config
 ```
